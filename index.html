@@ -1,65 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-   
-    <title>studentdata</title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cars</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main>
-<form id="dataform">
-    <fieldset>
-<legend>datastudentform</legend>
-<label >firstname</label>
-<input type="text" name="firstname"/>
+<main>
+<form id="orderform">
+<fieldset>
+<legend>
+  car form
+</legend>
 
 
-
-
-<label>country</label>
-<select name="country" >
-
-<option value="jordan">jordan</option>
-<option value="syria">syria</option>
-
-
-
-
+<label>typecar</label>
+<select name="typecar" >
+<option value="honday">honday</option>
+<option value="kia"> kia</option>
 
 
 
 
 
 </select>
+</br>
+<label >numbercar</label>
+<input type="text" id="num" name="numbercar"/>
 
-
-<label >ispass</label>
-<input type="checkbox"  name="ispass">
-
-<button type="submit">submit</button>
-
-
-
-
+</br>
+<button type="submit" id="bsubmit">submit</button>
 
 
 
 
 
 </fieldset>
-
-
-
-
-
-   
-
-
-
-
-
 
 
 
@@ -81,24 +59,19 @@
 
 
 
+</main>
+  
 
 
 <section>
-    <h2>prievious result</h2>
-    <ul id="result"></ul>
+  <table id="tablecar"></table>
+  
 </section>
 
 
 
-    </main>
 
 
-
-
-
-
-
-
-  <script src="app.js"></script>  
+  <script src="app.js"></script>
 </body>
 </html>
