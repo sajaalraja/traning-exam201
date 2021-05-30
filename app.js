@@ -1,108 +1,88 @@
 "use strict"
-let carform=document.getElementById("orderform");
-let table1=document.getElementById("tablecar");
 
-let cars=[];
- 
+let form1=document.getElementById("dataform");
+let list=document.getElementById("result");
+let resultstudent=[];
+
+function  Students(firstname,country,ispass){
+
+this.firstname=firstname;
+this.country=country;
+this.ispass=ispass;
+this.age=this.randomage(15,20);
+resultstudent.push(this);
 
 
-function Carworld(typecar,numbercar){
 
 
-this.typecar=typecar;
-this.numbercar=numbercar;
-this.price=this.randomprice();
 
-cars.push(this);
 
 
 }
-
-Carworld.prototype.randomprice = function () {
-    return this.price = Math.floor(Math.random() * 10000);
+Students.prototype.randomage = function () {
+    return this.age = Math.floor(Math.random() * (20-15+1)+15);
 };
-
 function settingitem(){
+let data=JSON.stringify(resultstudent);
+localStorage.setItem("result",data)
 
-let data=JSON.stringify(cars);
-localStorage.setItem('car',data);
+
 
 
 
 }
 function gettingitem(){
-let stringobj=localStorage.getItem("car");
+let stringobj=localStorage.getItem("result");
 let normalobj=JSON.parse(stringobj);
 
 if(normalobj!==null){
-
-
-    cars=normalobj;
-
-
-
-
+resultstudent=normalobj;
 
 }
-rendertable();
 
 
 
-
-
-
-
-
-
-
+renderlist();
 
 
 }
 
 
-function rendertable(){
-
-  table1.textContent='';
-let table=document.createElement("table");
-table1.appendChild(table);
-
-let tr1=document.createElement("tr");
-table.appendChild(tr1);
 
 
 
-let th2=document.createElement("th");
-tr1.appendChild(th2);
-th2.textContent="typecar";
-
-
-let th3=document.createElement("th");
-tr1.appendChild(th3);
-th3.textContent="numbercar";
-
-let th4=document.createElement("th");
-tr1.appendChild(th4);
-th4.textContent="price";
 
 
 
-for(let i=0;i<cars.length;i++){
-
-let row=document.createElement("tr");
-table.appendChild(row);
 
 
-let typecartd=document.createElement("td");
-row.appendChild(typecartd);
-typecartd.textContent=cars[i].typecar;
 
-let numbercartd=document.createElement("td");
-row.appendChild(numbercartd);
-numbercartd.textContent=cars[i].numbercar;
 
-let pricetd=document.createElement("td");
-row.appendChild(pricetd);
-pricetd.textContent=cars[i].price;
+
+
+
+function renderlist(){
+list.textContent='';
+for(let i=0;i<resultstudent.length;i++){
+
+let liel=document.createElement("li");
+let infop=document.createElement("p");
+let temp;
+if(resultstudent[i].ispass){
+
+temp="pass";
+
+
+
+}else{
+
+temp="fail"
+
+}
+
+infop.textContent=`${resultstudent[i].firstname}   resultt a ${temp}  ${resultstudent[i].country } ${resultstudent[i].age}`;
+liel.appendChild(infop);
+list.appendChild(liel);
 
 
 
@@ -121,74 +101,36 @@ pricetd.textContent=cars[i].price;
 }
 
 
-function handlesubmit(event){
-
-  event.preventDefault();
-
-  let typecar=event.target.typecar.value;
-let numbercar=event.target.numbercar.value;
-new Carworld(typecar,numbercar);
 
 
+
+
+
+function handlefunction(event){
+    event.preventDefault();
+
+let firstname=event.target.firstname.value;
+let country=event.target.country.value;
+let ispass=event.target.ispass.checked;
+console.log(event.target);
+new Students(firstname,country,ispass)
 
 settingitem();
-rendertable();
+renderlist();
+
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
 gettingitem();
-carform.addEventListener("submit",handlesubmit);
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+form1.addEventListener("submit",handlefunction)
