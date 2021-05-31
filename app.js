@@ -1,108 +1,56 @@
 "use strict"
-let carform=document.getElementById("orderform");
-let table1=document.getElementById("tablecar");
+let carform = document.getElementById("orderform");
+let table1 = document.getElementById("tablecar");
+let totalel = document.getElementById("totall");
 
-let cars=[];
- 
-
-
-function Carworld(typecar,numbercar){
+let cars = [];
 
 
-this.typecar=typecar;
-this.numbercar=numbercar;
-this.price=this.randomprice();
 
-cars.push(this);
+function Carworld(typecar, numbercar) {
+
+
+  this.typecar = typecar;
+  this.numbercar = numbercar;
+  this.price = this.randomprice();
+
+  cars.push(this);
 
 
 }
 
 Carworld.prototype.randomprice = function () {
-    return this.price = Math.floor(Math.random() * 10000);
+  return this.price = Math.floor(Math.random() * 10);
 };
 
-function settingitem(){
+function settingitem() {
 
-let data=JSON.stringify(cars);
-localStorage.setItem('car',data);
-
-
-
-}
-function gettingitem(){
-let stringobj=localStorage.getItem("car");
-let normalobj=JSON.parse(stringobj);
-
-if(normalobj!==null){
-
-
-    cars=normalobj;
-
-
+  let data = JSON.stringify(cars);
+  localStorage.setItem('car', data);
 
 
 
 }
-rendertable();
+function gettingitem() {
+  let stringobj = localStorage.getItem("car");
+  let normalobj = JSON.parse(stringobj);
+
+  if (normalobj !== null) {
+
+
+    cars = normalobj;
 
 
 
 
 
+  }
+  rendertable();
 
 
 
 
 
-
-
-}
-
-
-function rendertable(){
-
-  table1.textContent='';
-let table=document.createElement("table");
-table1.appendChild(table);
-
-let tr1=document.createElement("tr");
-table.appendChild(tr1);
-
-
-
-let th2=document.createElement("th");
-tr1.appendChild(th2);
-th2.textContent="typecar";
-
-
-let th3=document.createElement("th");
-tr1.appendChild(th3);
-th3.textContent="numbercar";
-
-let th4=document.createElement("th");
-tr1.appendChild(th4);
-th4.textContent="price";
-
-
-
-for(let i=0;i<cars.length;i++){
-
-let row=document.createElement("tr");
-table.appendChild(row);
-
-
-let typecartd=document.createElement("td");
-row.appendChild(typecartd);
-typecartd.textContent=cars[i].typecar;
-
-let numbercartd=document.createElement("td");
-row.appendChild(numbercartd);
-numbercartd.textContent=cars[i].numbercar;
-
-let pricetd=document.createElement("td");
-row.appendChild(pricetd);
-pricetd.textContent=cars[i].price;
 
 
 
@@ -113,33 +61,82 @@ pricetd.textContent=cars[i].price;
 }
 
 
+function rendertable() {
+  let total = 0;
+  table1.textContent = '';
+  let table = document.createElement("table");
+  table1.appendChild(table);
+
+  let tr1 = document.createElement("tr");
+  table.appendChild(tr1);
 
 
 
+  let th2 = document.createElement("th");
+  tr1.appendChild(th2);
+  th2.textContent = "typecar";
+
+
+  let th3 = document.createElement("th");
+  tr1.appendChild(th3);
+  th3.textContent = "numbercar";
+
+  let th4 = document.createElement("th");
+  tr1.appendChild(th4);
+  th4.textContent = "price";
+
+
+
+  for (let i = 0; i < cars.length; i++) {
+
+    let row = document.createElement("tr");
+    table.appendChild(row);
+
+
+    let typecartd = document.createElement("td");
+    row.appendChild(typecartd);
+    typecartd.textContent = cars[i].typecar;
+
+    let numbercartd = document.createElement("td");
+    row.appendChild(numbercartd);
+    numbercartd.textContent = cars[i].numbercar;
+
+    let pricetd = document.createElement("td");
+    row.appendChild(pricetd);
+    pricetd.textContent = cars[i].price;
+
+
+
+
+    total+=cars[i].price;
 
 
 }
 
 
-function handlesubmit(event){
+totalel.textContent=`TOTal   ${total}`;
+
+
+}
+
+
+function handlesubmit(event) {
 
   event.preventDefault();
 
-  let typecar=event.target.typecar.value;
-let numbercar=event.target.numbercar.value;
-new Carworld(typecar,numbercar);
+  let typecar = event.target.typecar.value;
+  let numbercar = event.target.numbercar.value;
+  new Carworld(typecar, numbercar);
 
 
 
-settingitem();
-rendertable();
+  settingitem();
+  rendertable();
 
 }
 gettingitem();
-carform.addEventListener("submit",handlesubmit);
+carform.addEventListener("submit", handlesubmit);
 
-
-    
 
 
 
